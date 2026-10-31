@@ -1,4 +1,35 @@
-.ipynb_checkpoints/ 
-*.zip 
-__pycache__/ 
-venv/ 
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Entorno local
+.venv/
+venv/
+env/
+
+# Django y base de datos local
+db.sqlite3
+*.log
+
+# Respaldos
+*.backup
+*.bak
+
+# Cuadernos de trabajo
+*.ipynb
+
+# Archivos estáticos generados
+staticfiles/
+
+# Fotografías originales de trabajo
+fotografias_biografia/
+imagenes_originales/
+imagenes_procesadas/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+.ipynb_checkpoints/

@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio web dedicado a la vida, obra y legado del Padre Gregorio Tomás.">
+    <title>Padre Gregorio Tomás</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor navegacion">
+            <a class="marca" href="/">Padre Gregorio Tomás</a>
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#historia">Su historia</a>
+                <a href="#legado">Su legado</a>
+                <a href="#galeria">Galería</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="portada" id="inicio">
+            <div class="portada-contenido">
+                <p class="sobrelinea">Memoria · Vida · Legado</p>
+                <h1>Padre Gregorio Tomás</h1>
+                <p class="introduccion">
+                    Un espacio para conocer su historia, compartir su obra
+                    y preservar su legado.
+                </p>
+                <a class="enlace-principal" href="#historia">Conocer su historia</a>
+            </div>
+        </section>
+
+        <section class="seccion contenedor" id="historia">
+            <p class="sobrelinea">Su recorrido</p>
+            <h2>Una vida que merece ser contada</h2>
+            <p>
+                En este espacio presentaremos la biografía, las experiencias
+                y los momentos importantes de la vida del Padre Gregorio Tomás.
+            </p>
+
+    <div class="bloque-fotografias-biografia">
+        <h3>Fotografías del Padre Gregorio Tomás</h3>
+        <div class="fotos-biografia">
+            {% for foto in fotos_biografia %}
+            <figure>
+                <img
+                    src="{% static 'biografia/' %}{{ foto|urlencode }}"
+                    alt="Fotografía del Padre Gregorio Tomás"
+                    loading="lazy">
+            </figure>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="entrevista-biografia">
+        <h3>Una entrevista en la prensa española</h3>
+        <p>
+            El 6 de agosto de 2011, el diario
+            <em>La Opinión de Zamora</em> publicó la entrevista
+            «Cuadros para despertar la conciencia del espectador».
+        </p>
+        <a href="https://www.laopiniondezamora.es/zamora/2011/08/06/cuadros-despertar-conciencia-espectador-1949556.html"
+           target="_blank" rel="noopener noreferrer">
+            Leer la entrevista en La Opinión de Zamora
+        </a>
+    </div>
+</section>
+
+        <section class="seccion seccion-clara" id="legado">
+            <div class="contenedor">
+                <p class="sobrelinea">Su obra</p>
+                <h2>Un legado para compartir</h2>
+                <p>
+                    Aquí reuniremos sus aportes, enseñanzas, proyectos y
+                    testimonios, con información y materiales documentados.
+                </p>
+            </div>
+        </section>
+
+
+    <section class="seccion galeria-seccion" id="galeria">
+        <div class="contenedor">
+            <p class="sobrelinea">Archivo visual</p>
+            <h2>Galería artística</h2>
+<p class="galeria-intro">Cuadros pintados por el Padre Gregorio Tomás, principalmente bajo la técnica de óleo sobre lienzo, inspirados en sus viajes y experiencias de docencia por Latinoamérica.</p>
+
+<div class="galeria-grid">
+                {% for foto in imagenes %}
+                <button class="foto-tarjeta"
+                        type="button"
+                        data-imagen="{% static 'galeria/' %}{{ foto|urlencode }}"
+                        aria-label="Ampliar fotografía">
+                    <img
+                        src="{% static 'galeria/' %}{{ foto|urlencode }}"
+                        alt="{{ foto }}"
+                        loading="lazy">
+                </button>
+                {% empty %}
+                <p>No hay fotografías disponibles.</p>
+                {% endfor %}
+            </div>
+
+            <p class="contador-galeria">
+                {{ imagenes|length }} fotografías en el archivo visual
+            </p>
+        </div>
+    </section>
+
+    <dialog id="visor-fotografias" class="visor-fotografias">
+        <button type="button" class="cerrar-visor"
+                aria-label="Cerrar fotografía">×</button>
+        <img id="imagen-ampliada" src="" alt="Fotografía ampliada">
+    </dialog>
+
+    <script>
+        const visor = document.getElementById("visor-fotografias");
+        const imagenAmpliada = document.getElementById("imagen-ampliada");
+
+        document.querySelectorAll(".foto-tarjeta").forEach(boton => {
+            boton.addEventListener("click", () => {
+                imagenAmpliada.src = boton.dataset.imagen;
+                visor.showModal();
+            });
+        });
+
+        document.querySelector(".cerrar-visor").addEventListener("click", () => {
+            visor.close();
+        });
+
+        visor.addEventListener("click", evento => {
+            if (evento.target === visor) {
+                visor.close();
+            }
+        });
+    </script>
+
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor">
+            <p>Padre Gregorio Tomás</p>
+            <p class="pie-secundario">Memoria y legado.</p>
+        </div>
+    </footer>
+
+<!-- INICIO PIE INSTITUCIONAL -->
+<footer class="pie-institucional">
+    <div class="pie-contenido">
+
+        <h2>Padre Gregorio Tomás</h2>
+
+        <p class="pie-financiacion">
+            Esta página web es financiada por
+            <strong>Fundación Poco a Poco</strong>.
+        </p>
+
+        <div class="pie-contacto">
+            <p>
+                Correo:
+                <a href="mailto:info@datapocoapoco.org">
+                    info@datapocoapoco.org
+                </a>
+            </p>
+        </div>
+
+        <div class="pie-proyectos">
+            <h3>Conoce nuestros proyectos</h3>
+
+            <a href="https://datapocoapoco.org"
+               target="_blank" rel="noopener noreferrer">
+                Data Poco a Poco
+            </a>
+
+            <a href="https://lapaznoesblanca.org"
+               target="_blank" rel="noopener noreferrer">
+                La Paz No es Blanca
+            </a>
+        </div>
+
+        <div class="pie-creditos">
+            © 2026 Fundación Poco a Poco.
+            Todos los derechos reservados.
+        </div>
+
+    </div>
+</footer>
+<!-- FIN PIE INSTITUCIONAL -->
+
+</body>
+</html>
